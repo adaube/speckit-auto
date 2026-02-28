@@ -1,6 +1,6 @@
 # speckit-auto
 
-A single-command orchestrator that chains the entire [speckit](https://github.com/speckai/speckit) pipeline automatically:
+A single-command orchestrator that chains the entire [speckit](https://github.com/github/spec-kit) pipeline automatically:
 
 ```
 specify → clarify → plan → tasks → analyze → implement
@@ -17,16 +17,18 @@ Instead of manually invoking each `/speckit.*` skill in sequence, run `/speckit.
 
 ## Installation
 
-Copy the command file into your project's `.claude/commands/` directory (where your speckit skills already live):
-
-```bash
-cp commands/speckit.auto.md <your-project>/.claude/commands/
-```
-
-Or use the install script:
+Run the install script to set up speckit and speckit.auto in one step:
 
 ```bash
 ./install.sh <your-project>
+```
+
+This runs `specify init . --ai claude` in your project and then copies `speckit.auto.md` into `.claude/commands/`.
+
+If you already have speckit installed, you can just copy the command file directly:
+
+```bash
+cp commands/speckit.auto.md <your-project>/.claude/commands/
 ```
 
 ## Usage
@@ -41,5 +43,5 @@ Speckit updates overwrite `speckit.specify.md`, `speckit.clarify.md`, etc. but n
 
 ## Requirements
 
-- [speckit](https://github.com/speckai/speckit) skills installed in `.claude/commands/`
+- [speckit](https://github.com/github/spec-kit) (`specify` CLI)
 - Claude Code
