@@ -8,13 +8,25 @@ description: Full-pipeline orchestrator that auto-chains specify → clarify →
 $ARGUMENTS
 ```
 
-You **MUST** consider the user input before proceeding (if not empty).
+You **MUST** consider the user input before proceeding (if not empty). If the input is empty, **STOP** and tell the user:
+
+> Use `/speckit.auto` the same way you'd use `/speckit.specify` — describe what you want to build and why. For example:
+>
+> `/speckit.auto Build an application that can help me organize my photos in separate photo albums. Albums are grouped by date and can be re-organized by dragging and dropping on the main page.`
 
 ## Purpose
 
 You are an orchestrator that runs the full speckit pipeline automatically. You invoke each skill in sequence, using the `handoffs` frontmatter in each skill file to determine the next step. Interactive skills (like clarify) still pause for user input — you only automate the *transitions between* skills.
 
 ## Execution
+
+### Step 0: Check for a constitution
+
+Before doing anything else, check if a constitution file exists (e.g. `.speckit/constitution.md` or similar). If no constitution is found, **STOP** and tell the user:
+
+> No constitution detected. A constitution defines the principles that guide your specs, plans, and code. Set one up first by running `/speckit.constitution` or see the [speckit constitution docs](https://github.com/github/spec-kit#constitution).
+
+Do not proceed with the pipeline until a constitution is in place.
 
 ### Step 1: Start the pipeline
 

@@ -33,8 +33,20 @@ cp commands/speckit.auto.md <your-project>/.claude/commands/
 
 ## Usage
 
+### 1. Set up a constitution first
+
+Before running the pipeline, your project needs a constitution — it defines the principles and constraints that guide all generated specs, plans, and code. If you don't have one yet, see the [speckit constitution docs](https://github.com/github/spec-kit#constitution) or run:
+
 ```
-/speckit.auto Add a score counter HUD that displays points and a combo multiplier
+/speckit.constitution
+```
+
+### 2. Describe what you want to build
+
+Once a constitution is in place, describe the feature you want — what it does and why it matters:
+
+```
+/speckit.auto Add a score counter HUD that displays points and a combo multiplier so players get real-time feedback on their performance
 ```
 
 ## Survives speckit updates
