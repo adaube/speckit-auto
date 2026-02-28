@@ -19,16 +19,28 @@ Instead of manually invoking each `/speckit.*` skill in sequence, run `/speckit.
 
 Run the install script to set up speckit and speckit.auto in one step:
 
+**macOS / Linux:**
 ```bash
 ./install.sh <your-project>
+```
+
+**Windows (PowerShell):**
+```powershell
+.\install.ps1 <your-project>
 ```
 
 This runs `specify init . --ai claude` in your project and then copies `speckit.auto.md` into `.claude/commands/`.
 
 If you already have speckit installed, you can just copy the command file directly:
 
+**macOS / Linux:**
 ```bash
 cp commands/speckit.auto.md <your-project>/.claude/commands/
+```
+
+**Windows (PowerShell):**
+```powershell
+Copy-Item commands\speckit.auto.md <your-project>\.claude\commands\
 ```
 
 ## Usage
