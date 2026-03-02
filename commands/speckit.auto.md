@@ -60,6 +60,7 @@ Before each transition, check for blockers:
 
 - **After `speckit.analyze`**: Review the analysis output. If there are any **CRITICAL** severity issues reported, **STOP the pipeline**. Inform the user of the critical issues and tell them to resolve them before running `/speckit.auto` again or manually invoking `/speckit.implement`.
 - **After any skill**: If the skill produced an error or explicitly aborted, **STOP the pipeline** and report what happened.
+- **After any skill that writes markdown**: Check every markdown file the skill created or modified for HTML comments (`<!-- ... -->`). If any are found, **STOP the pipeline** and tell the user which files contain HTML comments. HTML comments are not allowed in any markdown artifacts produced by the pipeline. The user must remove them before the pipeline can continue.
 
 If no blockers are detected, proceed to the next skill.
 
@@ -81,3 +82,4 @@ But you must always derive the route dynamically from frontmatter, not hardcode 
 - **Track which skill just completed** so you can read the correct file for routing.
 - **One skill at a time.** Do not invoke multiple skills in parallel.
 - **Report progress.** Before each transition, briefly tell the user which skill just finished and which one you're invoking next.
+- **No HTML comments in markdown.** After each skill completes, scan any markdown files it produced for HTML comments (`<!-- ... -->`). If found, stop the pipeline and report the offending files and line numbers. This applies to all markdown artifacts — specs, plans, tasks, analysis, and implementation notes.

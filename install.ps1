@@ -7,11 +7,19 @@ $ErrorActionPreference = "Stop"
 
 # Install speckit skills
 Write-Host "Installing speckit skills..."
+$specKitFailed = $false
 Push-Location $ProjectPath
 try {
     specify init . --ai claude
+} catch {
+    $specKitFailed = $true
 } finally {
     Pop-Location
+}
+
+if ($specKitFailed) {
+    Write-Host "speckit installation exited — skipping speckit.auto"
+    exit 0
 }
 
 # Layer speckit.auto on top

@@ -11,7 +11,10 @@ PROJECT="$1"
 
 # Install speckit skills
 echo "Installing speckit skills..."
-(cd "$PROJECT" && specify init . --ai claude)
+if ! (cd "$PROJECT" && specify init . --ai claude); then
+  echo "speckit installation exited — skipping speckit.auto"
+  exit 0
+fi
 
 # Layer speckit.auto on top
 TARGET="$PROJECT/.claude/commands"
