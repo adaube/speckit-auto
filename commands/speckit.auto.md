@@ -22,11 +22,10 @@ You are an orchestrator that runs the full speckit pipeline automatically. You i
 
 ### Step 0: Check for a constitution
 
-Before doing anything else, check if a constitution file exists (e.g. `.speckit/constitution.md` or similar). If no constitution is found, **STOP** and tell the user:
+Before doing anything else, check if a constitution file exists (e.g. `.speckit/constitution.md` or similar).
 
-> No constitution detected. A constitution defines the principles that guide your specs, plans, and code. Set one up first by running `/speckit.constitution` or see the [speckit constitution docs](https://github.com/github/spec-kit#constitution).
-
-Do not proceed with the pipeline until a constitution is in place.
+- If a constitution exists: proceed to Step 1.
+- If no constitution is found: inform the user that a constitution is needed and you will create one now. Invoke `/speckit.constitution` using the Skill tool. After it completes, continue to Step 2 (the routing loop) — the constitution skill's handoff frontmatter will route to `speckit.specify`. When the handoff prompt is used for specify, append the user's original feature description (`$ARGUMENTS`) so it carries through.
 
 ### Step 1: Start the pipeline
 

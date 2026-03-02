@@ -55,17 +55,21 @@ Copy-Item commands\speckit.auto.md <your-project>\.claude\commands\
 
 All commands below are run inside Claude Code.
 
-### 1. Set up a constitution first
+### 1. Start with a constitution
 
-Before running the pipeline, your project needs a constitution — it defines the principles and constraints that guide all generated specs, plans, and code. If you don't have one yet, see the [speckit constitution docs](https://github.com/github/spec-kit#constitution) or run inside Claude Code:
+The constitution describes your project's governing principles and development guidelines that will guide all subsequent development. It's created once per project and covers things like:
 
-```
-/speckit.constitution
-```
+- **Application context** — what the project is and the user experience it delivers
+- **Development guidelines** — how code gets written (e.g. must implement using red/green TDD)
+- **Stack constraints** — languages, frameworks, and tooling decisions
+
+We recommend starting with some battle-hardened defaults: describe your application and user experience, and require red/green TDD for all implementation. You can always refine later.
+
+If your project already has a constitution, skip to step 2. Otherwise, create one by running `/speckit.constitution` inside Claude Code — or just go straight to step 2 and speckit.auto will walk you through it automatically.
 
 ### 2. Describe what you want to build
 
-Once a constitution is in place, describe the feature you want — what it does and why it matters:
+Describe the feature you want — what it does and why it matters:
 
 ```
 /speckit.auto Add a score counter HUD that displays points and a combo multiplier so players get real-time feedback on their performance
@@ -77,4 +81,16 @@ Speckit updates overwrite `speckit.specify.md`, `speckit.clarify.md`, etc. but n
 
 ## Tips
 
-The full pipeline generates substantial context across 6 phases. If your sessions hit context limits during the `implement` phase, [claude-context-mode](https://github.com/mksglu/claude-context-mode) can compress intermediate outputs. It installs globally and works automatically — no per-project setup needed.
+The full pipeline generates substantial context across 6 phases. 
+I recommend using [claude-context-mode](https://github.com/mksglu/claude-context-mode) to compress intermediate outputs.
+
+Inside Claude Code...
+1. add the plugin:
+```bash
+/plugin marketplace add mksglu/claude-context-mode
+```
+2. install the plugin:
+```bash
+/plugin marketplace add mksglu/claude-context-mode
+```
+3. restart claude code to load plugin and begin using
