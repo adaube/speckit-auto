@@ -74,3 +74,7 @@ Once a constitution is in place, describe the feature you want — what it does 
 ## Survives speckit updates
 
 Speckit updates overwrite `speckit.specify.md`, `speckit.clarify.md`, etc. but never touch `speckit.auto.md` since it's a separate file. The routing is derived dynamically from frontmatter, so if speckit changes its handoff graph, auto adapts automatically.
+
+## Tips
+
+The full pipeline generates substantial context across 6 phases. If your sessions hit context limits during the `implement` phase, [claude-context-mode](https://github.com/mksglu/claude-context-mode) can compress intermediate outputs. It installs globally and works automatically — no per-project setup needed.
