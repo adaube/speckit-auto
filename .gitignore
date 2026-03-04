@@ -1,2 +1,6 @@
 .specify/
 .claude/
+tests/
+specs/
+CLAUDE.md
+
