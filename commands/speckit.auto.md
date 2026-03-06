@@ -33,7 +33,7 @@ Invoke `/speckit.specify` using the Skill tool, passing the user's feature descr
 
 ### Step 2: Routing loop
 
-After each skill completes, determine the next skill to invoke:
+After **every** skill completes — including interactive ones like `clarify` — you MUST determine the next skill to invoke. Never stop here just because a skill involved back-and-forth with the user.
 
 1. **Read** the skill file that just ran: `.claude/commands/speckit.<name>.md`
 2. **Parse** the YAML frontmatter and extract the `handoffs` array
@@ -81,4 +81,5 @@ But you must always derive the route dynamically from frontmatter, not hardcode 
 - **Track which skill just completed** so you can read the correct file for routing.
 - **One skill at a time.** Do not invoke multiple skills in parallel.
 - **Report progress.** Before each transition, briefly tell the user which skill just finished and which one you're invoking next.
+- **CRITICAL — Always continue after interactive skills.** After `clarify` (or any interactive skill) finishes, you MUST continue the routing loop. Do NOT stop the pipeline just because a skill involved user interaction. The pipeline is only complete when there is no next route or a blocker is detected. After clarify completes, immediately read its frontmatter, determine the next skill (typically `plan`), and invoke it.
 - **No HTML comments in markdown.** After each skill completes, scan any markdown files it produced for HTML comments (`<!-- ... -->`). If found, stop the pipeline and report the offending files and line numbers. This applies to all markdown artifacts — specs, plans, tasks, analysis, and implementation notes.
